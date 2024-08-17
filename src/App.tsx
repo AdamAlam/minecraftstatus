@@ -1,9 +1,9 @@
+import axios from "axios";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import "./App.css";
-import axios from "axios";
 import { Response } from "./Response.types";
 import { Vortex } from "./components/ui/vortex";
-import { motion } from "framer-motion";
 
 function App() {
   const [resData, setResData] = useState<Response>();
@@ -75,9 +75,13 @@ function App() {
                   duration: 0.5,
                   ease: "easeInOut",
                 }}
-                className="text-transparent bg-gradient-to-br from-purple-400 to-pink-600 bg-clip-text text-xl"
+                className="flex items-center space-x-4 text-transparent bg-gradient-to-br from-purple-400 to-pink-600 bg-clip-text text-xl"
               >
-                {player.name_clean}
+                <img
+                  src={`https://crafatar.com/avatars/${player.uuid}`}
+                  style={{ height: "1em", width: "auto" }}
+                />
+                <span>{player.name_clean}</span>
               </motion.li>
             ))}
         </ul>
