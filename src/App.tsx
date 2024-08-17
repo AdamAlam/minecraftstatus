@@ -26,7 +26,7 @@ function App() {
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+          className="mt-[-60%] bg-gradient-to-br from-slate-300 to-slate-500 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl mb-4"
         >
           Status:{" "}
           {resData?.online ? (
@@ -50,7 +50,7 @@ function App() {
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="bg-gradient-to-br from-teal-400 to-blue-600 bg-clip-text text-transparent"
+          className="bg-gradient-to-br from-teal-400 to-blue-600 bg-clip-text text-transparent text-2xl"
         >
           Players online: {resData.players.online}
         </motion.h2>
@@ -68,7 +68,7 @@ function App() {
                 duration: 0.5,
                 ease: "easeInOut",
               }}
-              className="text-transparent bg-gradient-to-br from-purple-400 to-pink-600 bg-clip-text"
+              className="text-transparent bg-gradient-to-br from-purple-400 to-pink-600 bg-clip-text text-xl"
             >
               {player.name_clean}
             </motion.li>
