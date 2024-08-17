@@ -1,43 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
-
-export interface Response {
-  online: boolean;
-  host: string;
-  port: number;
-  ip_address: string;
-  eula_blocked: boolean;
-  retrieved_at: number;
-  expires_at: number;
-  srv_record: null;
-  version: Version;
-  players: Players;
-  motd: MOTD;
-  icon: null;
-  mods: any[];
-  software: null;
-  plugins: any[];
-}
-
-export interface MOTD {
-  raw: string;
-  clean: string;
-  html: string;
-}
-
-export interface Players {
-  online: number;
-  max: number;
-  list: any[];
-}
-
-export interface Version {
-  name_raw: string;
-  name_clean: string;
-  name_html: string;
-  protocol: number;
-}
+import { Response } from "./Response.types";
+import { LampContainer } from "./components/ui/lamp";
+import { motion } from "framer-motion";
 
 function App() {
   const [resData, setResData] = useState<Response>();
@@ -45,32 +11,70 @@ function App() {
   useEffect(() => {
     axios
       .get("https://api.mcstatus.io/v2/status/java/68.203.213.74:25565")
-      .then((res) => {
-        console.log(res.data);
-        return res.data;
-      })
+      .then((res) => res.data)
       .then((data: Response) => setResData(data));
   }, []);
 
   return (
-    <>
+    <LampContainer className="w-[100vw]">
       {resData && (
-        <h1>
+        <motion.h1
+          initial={{ opacity: 0.5, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+        >
           Status:{" "}
           {resData?.online ? (
-            <span style={{ color: "green" }}>UP</span>
+            <span className="bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+              UP
+            </span>
           ) : (
-            <span style={{ color: "red" }}>NO, TOUCH GRASS</span>
+            <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
+              DOWN
+            </span>
           )}
-        </h1>
+        </motion.h1>
       )}
 
-      {resData?.online && <h2>Players online: {resData.players.online}</h2>}
-      <ul>
-        {resData?.players.list &&
-          resData.players.list.map((player) => <li>{player.name_clean}</li>)}
+      {resData?.online && (
+        <motion.h2
+          initial={{ opacity: 0.5, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="bg-gradient-to-br from-teal-400 to-blue-600 bg-clip-text text-transparent"
+        >
+          Players online: {resData.players.online}
+        </motion.h2>
+      )}
+
+      <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
+        {resData?.players?.list &&
+          resData.players.list.map((player, index) => (
+            <motion.li
+              key={player.name_clean}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.8 + index * 0.1,
+                duration: 0.5,
+                ease: "easeInOut",
+              }}
+              className="text-transparent bg-gradient-to-br from-purple-400 to-pink-600 bg-clip-text"
+            >
+              {player.name_clean}
+            </motion.li>
+          ))}
       </ul>
-    </>
+    </LampContainer>
   );
 }
 
