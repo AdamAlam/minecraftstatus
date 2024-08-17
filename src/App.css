@@ -1,0 +1,20 @@
+#root {
+  background-color: black;
+}
+
+body,
+html {
+  background-color: black;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
