@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Response } from "./Response.types";
+import MinecraftSkinViewer from "./components/SkinViewer";
 import { Vortex } from "./components/ui/vortex";
 
 function App() {
@@ -77,9 +78,10 @@ function App() {
                 }}
                 className="flex items-center space-x-4 text-transparent bg-gradient-to-br from-purple-400 to-pink-600 bg-clip-text text-xl"
               >
-                <img
-                  src={`https://crafatar.com/avatars/${player.uuid}`}
-                  style={{ height: "1em", width: "auto" }}
+                <MinecraftSkinViewer
+                  uuid={player.uuid}
+                  width={75}
+                  height={75}
                 />
                 <span>{player.name_clean}</span>
               </motion.li>
